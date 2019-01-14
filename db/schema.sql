@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS name_basics
 	primaryName varchar not null,
 	birthYear varchar not null,
 	deathYear varchar default null,
-	primaryProfession varchar not null,
+	primaryProfession varchar default null,
 	knownForTitles varchar not null
 );
 
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS title_basics
 	primaryTitle varchar not null,
 	originalTitle varchar not null,
 	isAdult boolean default false,
-	startYear bigint not null,
-	endYear bigint default null,
-	runtimeMinutes bigint default null,
+	startYear varchar not null,
+	endYear varchar default null,
+	runtimeMinutes varchar default null,
 	genres varchar not null
 );
 
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS title_episodes
 (
 	tconst varchar not null,
 	parentTconst varchar not null,
-	seasonNumber bigint default null,
-	episodeNumber bigint default null
+	seasonNumber varchar default null,
+	episodeNumber varchar default null
 );
 
 
