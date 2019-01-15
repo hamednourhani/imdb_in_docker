@@ -13,7 +13,7 @@ trait TitleAkaComponent {
 
   private[TitleAkaComponent] final class TitleAkaTable(tag: Tag) extends Table[TitleAka](tag, "title_basics") {
 
-    def titleId         = column[String]("titleId", O.PrimaryKey)
+    def titleId         = column[String]("titleId")
     def ordering        = column[Int]("ordering")
     def title           = column[String]("title")
     def region          = column[Option[String]]("region",O.Default(null))

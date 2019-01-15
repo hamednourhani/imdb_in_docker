@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB : imdb
-      PGDATA : /tmp/postgresql/data
+      PGDATA : /var/lib/postgresql/data
     volumes:
     - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:

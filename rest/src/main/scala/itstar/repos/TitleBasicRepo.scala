@@ -18,10 +18,10 @@ trait TitleBasicComponent {
     def titleType      = column[String]("titleType")
     def primaryTitle   = column[String]("primaryTitle")
     def originalTitle  = column[String]("originalTitle")
-    def isAdult        = column[Boolean]("isAdult")
-    def startYear      = column[Int]("startYear")
-    def endYear        = column[Option[Int]]("endYear",O.Default(null))
-    def runtimeMinutes = column[Option[Long]]("runtimeMinutes",O.Default(null))
+    def isAdult        = column[String]("isAdult")
+    def startYear      = column[String]("startYear")
+    def endYear        = column[Option[String]]("endYear",O.Default(null))
+    def runtimeMinutes = column[Option[String]]("runtimeMinutes",O.Default(null))
     def genres         = column[String]("genres")
 
     def * : ProvenShape[TitleBasic] =

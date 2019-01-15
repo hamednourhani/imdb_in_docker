@@ -5,9 +5,14 @@ IMDB Dummy Rest
 
 run database (`imdb`) and populate sample tables by dummy data from `dummy` folder :
 
-```cd db && ./db.sh```
+```./db.sh```
 
-test db :
+##### note :
+before start `db.sh` replace `tsv` files in `db/dummy` with the real one.
+
+
+
+##### test db :
 
 `sudo -u postgres psql -d imdb -h 127.0.0.1 -p 45432`
 

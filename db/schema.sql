@@ -1,20 +1,7 @@
--- create title akas table
-CREATE TABLE IF NOT EXISTS title_akas
-(
-	titleId varchar not null,
-	ordering bigint not null,
-	title varchar not null,
-	region varchar default null,
-	language varchar default null,
-	types varchar default null,
-	attributes varchar default null,
-	isOriginalTitle boolean default false
-);
-
 -- create name basics table
 CREATE TABLE IF NOT EXISTS name_basics
 (
-	nconst varchar not null,
+	nconst varchar not null PRIMARY KEY,
 	primaryName varchar not null,
 	birthYear varchar not null,
 	deathYear varchar default null,
@@ -25,17 +12,29 @@ CREATE TABLE IF NOT EXISTS name_basics
 -- create title basics table
 CREATE TABLE IF NOT EXISTS title_basics
 (
-	tconst varchar not null,
+	tconst varchar not null PRIMARY KEY,
 	titleType varchar not null,
 	primaryTitle varchar not null,
 	originalTitle varchar not null,
-	isAdult boolean default false,
+	isAdult varchar not null,
 	startYear varchar not null,
 	endYear varchar default null,
 	runtimeMinutes varchar default null,
 	genres varchar not null
 );
 
+-- create title akas table
+CREATE TABLE IF NOT EXISTS title_akas
+(
+	titleId varchar not null,
+	ordering bigint not null,
+	title varchar not null,
+	region varchar default null,
+	language varchar default null,
+	types varchar default null,
+	attributes varchar default null,
+	isOriginalTitle varchar default null
+);
 
 -- create title crews table
 CREATE TABLE IF NOT EXISTS title_crews
