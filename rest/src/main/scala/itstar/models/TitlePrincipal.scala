@@ -11,6 +11,7 @@ package itstar.models
 case class TitlePrincipal(
     tconst: String,
     ordering: Int,
+    nconst : String,
     category: String,
     job: Option[String] = None,
     characters: Option[String] = None

@@ -20,5 +20,5 @@ case class TitleBasic(
     startYear: String,
     endYear: Option[String]=None,
     runtimeMinutes: Option[String]=None,
-    genres: String
+    genres: Option[String]=None
 )

@@ -17,6 +17,7 @@ trait TitlePrincipalComponent {
 
     def tconst     = column[String]("tconst")
     def ordering   = column[Int]("ordering")
+    def nconst     = column[String]("nconst")
     def category   = column[String]("category")
     def job        = column[Option[String]]("job",O.Default(null))
     def characters = column[Option[String]]("characters",O.Default(null))
@@ -25,6 +26,7 @@ trait TitlePrincipalComponent {
       (
         tconst,
         ordering,
+        nconst,
         category,
         job,
         characters

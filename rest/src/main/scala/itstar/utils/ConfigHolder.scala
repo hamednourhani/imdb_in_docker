@@ -1,5 +1,6 @@
 package itstar.utils
 import akka.actor.ActorSystem
+import akka.stream.alpakka.slick.javadsl.SlickSession
 import akka.stream.{ActorMaterializer, Materializer}
 import com.typesafe.config.{Config, ConfigFactory}
 
@@ -15,5 +16,6 @@ object ConfigHolder {
   implicit val system: ActorSystem        = ActorSystem("ActorSystem")
   implicit val materializer: Materializer = ActorMaterializer()
   implicit val ec: ExecutionContext       = system.dispatcher
+
 
 }

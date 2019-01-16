@@ -22,7 +22,7 @@ trait TitleBasicComponent {
     def startYear      = column[String]("startYear")
     def endYear        = column[Option[String]]("endYear",O.Default(null))
     def runtimeMinutes = column[Option[String]]("runtimeMinutes",O.Default(null))
-    def genres         = column[String]("genres")
+    def genres         = column[Option[String]]("genres")
 
     def * : ProvenShape[TitleBasic] =
       (

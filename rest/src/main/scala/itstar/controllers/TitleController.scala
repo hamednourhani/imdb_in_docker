@@ -3,13 +3,13 @@ import itstar.repos.{Repos, ReposComponent, ReposImpl}
 
 object TitleController {
 
-  private val singleton = new TitleController(ReposImpl)
+  private val singleton = new TitleControllerImpl(ReposImpl)
 
-  def apply(): TitleController = singleton
+  def apply(): TitleControllerImpl = singleton
 
 }
 
-private class TitleController(val repos: Repos) extends ReposComponent{
+class TitleControllerImpl(val repos: Repos) extends ReposComponent{
 
 
 

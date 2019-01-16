@@ -7,6 +7,6 @@ package itstar.models
   */
 case class TitleCrew(
     tconst: String,
-    directors: Option[String]=None,
-    writers: Option[String]=None
+    directors: List[String]=Nil,
+    writers: List[String]=Nil
 )

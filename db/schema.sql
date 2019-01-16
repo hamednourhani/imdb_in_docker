@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS title_principals
 (
 	tconst varchar not null,
 	ordering bigint not null,
-	category varchar not null,
+	nconst varchar default null,
+	category varchar default null,
 	job varchar default null,
 	characters varchar default null
 );
