@@ -26,16 +26,16 @@ lazy val settings = Seq(
 
 lazy val dependencies =
   new {
-    val akkaV         = "2.5.18"
-    val akkaHttpV     = "10.1.5"
-    val slickVersion  = "3.2.3"
-    val catsV         = "1.5.0"
-    val scalaLoggingV = "3.7.2"
-    val postgresV     = "42.1.4"
-    val slickPgV      = "0.16.3"
-    val logBackV      = "1.2.3"
-    val alpakkaV      = "1.0-M1"
-    val shapelessV    = "2.3.3"
+    val akkaV          = "2.5.19"
+    val akkaHttpV      = "10.1.5"
+    val slickVersion   = "3.2.3"
+    val catsV          = "1.5.0"
+    val scalaLoggingV  = "3.7.2"
+    val postgresV      = "42.1.4"
+    val slickPgV       = "0.16.3"
+    val logBackV       = "1.2.3"
+    val alpakkaV       = "1.0-M1"
+    val shapelessV     = "2.3.3"
     val slickPgVersion = "0.16.3"
 
     val akkaHttp         = "com.typesafe.akka"          %% "akka-http"                 % akkaHttpV
@@ -59,28 +59,47 @@ lazy val global = project
   .in(file("."))
   .aggregate(rest)
 
-lazy val rest =
+lazy val common =
   project
     .settings(
       settings,
       libraryDependencies ++= Seq(
         dependencies.akkaStream,
-        dependencies.akkaHttp,
         dependencies.spray,
-        dependencies.catsCore,
-        dependencies.catsKernel,
-        dependencies.catsMacros,
         dependencies.slick,
         dependencies.postgres,
         dependencies.slickPg,
         dependencies.slickPgSprayJson,
         dependencies.logging,
-        dependencies.logback,
+        dependencies.logback
+      )
+    )
+
+lazy val dummy =
+  project
+    .settings(
+      settings,
+      libraryDependencies ++= Seq(
+        dependencies.akkaStream,
         dependencies.alpakkaCSV,
         dependencies.alpakkaSlick,
         dependencies.shapeless
       )
     )
+    .dependsOn(common)
+
+lazy val rest =
+  project
+    .settings(
+      settings,
+      libraryDependencies ++= Seq(
+        dependencies.akkaHttp,
+        dependencies.catsCore,
+        dependencies.catsKernel,
+        dependencies.catsMacros
+      )
+    )
+    .dependsOn(common)
 
 addCommandAlias(
   "fmt",
