@@ -17,11 +17,11 @@ trait TitleBasicComponent {
     def titleType      = column[String]("titleType")
     def primaryTitle   = column[String]("primaryTitle")
     def originalTitle  = column[String]("originalTitle")
-    def isAdult        = column[String]("isAdult")
+    def isAdult        = column[Boolean]("isAdult",O.Default(false))
     def startYear      = column[String]("startYear")
     def endYear        = column[Option[String]]("endYear", O.Default(null))
     def runtimeMinutes = column[Option[String]]("runtimeMinutes", O.Default(null))
-    def genres         = column[Option[String]]("genres")
+    def genres         = column[List[String]]("genres" ,O.Default(Nil))
 
     def * : ProvenShape[TitleBasic] =
       (

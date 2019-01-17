@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS name_basics
 	primaryName varchar not null,
 	birthYear varchar not null,
 	deathYear varchar default null,
-	primaryProfession varchar default null,
-	knownForTitles varchar not null
+	primaryProfession text[] default '{}'::text[],
+	knownForTitles text[] default '{}'::text[]
 );
 
 -- create title basics table
@@ -16,11 +16,11 @@ CREATE TABLE IF NOT EXISTS title_basics
 	titleType varchar not null,
 	primaryTitle varchar not null,
 	originalTitle varchar not null,
-	isAdult varchar not null,
+	isAdult boolean not null,
 	startYear varchar not null,
 	endYear varchar default null,
 	runtimeMinutes varchar default null,
-	genres varchar not null
+	genres text[] default '{}'::text[]
 );
 
 -- create title akas table
@@ -31,17 +31,17 @@ CREATE TABLE IF NOT EXISTS title_akas
 	title varchar not null,
 	region varchar default null,
 	language varchar default null,
-	types varchar default null,
-	attributes varchar default null,
-	isOriginalTitle varchar default null
+	types text[] default '{}'::text[],
+	attributes text[] default '{}'::text[],
+	isOriginalTitle boolean default false
 );
 
 -- create title crews table
 CREATE TABLE IF NOT EXISTS title_crews
 (
 	tconst varchar not null,
-	directors varchar default null,
-	writers varchar default null
+	directors text[] default '{}'::text[],
+	writers text[] default '{}'::text[]
 );
 
 
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS title_episodes
 (
 	tconst varchar not null,
 	parentTconst varchar not null,
-	seasonNumber varchar default null,
-	episodeNumber varchar default null
+	seasonNumber bigint default null,
+	episodeNumber bigint default null
 );
 
 
