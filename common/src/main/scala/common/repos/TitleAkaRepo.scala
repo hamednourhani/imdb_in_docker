@@ -1,12 +1,22 @@
 package common.repos
+import common.config.ConfigHolder.ec
+import common.database.DatabaseConnectorImpl.db
+import common.database.ExtendedPostgresProfile.api._
 import common.models.TitleAka
 import slick.lifted.ProvenShape
-import common.database.ExtendedPostgresProfile.api._
 
+import scala.concurrent.Future
 
-trait TitleAkaRepo {}
+trait TitleAkaRepo {
+  def batchInsert(ts: Seq[TitleAka]): Future[Int]
+}
 
-object TitleAkaRepoImpl extends TitleAkaRepo with TitleAkaComponent {}
+object TitleAkaRepoImpl extends TitleAkaRepo with TitleAkaComponent {
+  def batchInsert(ts: Seq[TitleAka]): Future[Int] = {
+    val action = titleAkasTable ++= ts
+    db.run(action).map(_.size)
+  }
+}
 
 trait TitleAkaComponent {
 
@@ -17,8 +27,8 @@ trait TitleAkaComponent {
     def title           = column[String]("title")
     def region          = column[Option[String]]("region", O.Default(null))
     def language        = column[Option[String]]("language", O.Default(null))
-    def types           = column[Option[String]]("types", O.Default(null))
-    def attributes      = column[Option[String]]("attributes", O.Default(null))
+    def types           = column[List[String]]("types", O.Default(Nil))
+    def attributes      = column[List[String]]("attributes", O.Default(Nil))
     def isOriginalTitle = column[Boolean]("isOriginalTitle")
 
     def * : ProvenShape[TitleAka] =

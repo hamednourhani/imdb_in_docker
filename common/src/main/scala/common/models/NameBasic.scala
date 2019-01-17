@@ -13,6 +13,6 @@ case class NameBasic(
     primaryName: String,
     birthYear: String,
     deathYear: Option[String]=None,
-    primaryProfession: String,
-    knownForTitles: String
+    primaryProfession: List[String]=Nil,
+    knownForTitles: List[String]=Nil
 )

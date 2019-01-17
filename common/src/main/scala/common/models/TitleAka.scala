@@ -27,7 +27,7 @@ case class TitleAka(
     title: String,
     region: Option[String] = None,
     language: Option[String] = None,
-    types: Option[String] = None,
-    attributes: Option[String] = None,
+    types: List[String] = Nil,
+    attributes: List[String] = Nil,
     isOriginalTitle: Boolean
 )

@@ -1,35 +1,47 @@
 package dummy
 import com.typesafe.scalalogging.LazyLogging
 import common.config.ConfigHolder._
+import common.repos._
 
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 object DummyRunner extends App with LazyLogging {
 
-  import common.database.ExtendedPostgresProfile.api._
-  import common.database.DatabaseConnectorImpl.db
+  val dummyFiles = config.getConfig("dummyFiles")
 
-  db.run(sql"".as[String]).foreach(println)
+  val nameBasicsFile      = dummyFiles.getString("nameBasics")
+  val titleAkasFile       = dummyFiles.getString("titleAkas")
+  val titleBasicsFile     = dummyFiles.getString("titleBasics")
+  val titleCrewsFile      = dummyFiles.getString("titleCrews")
+  val titleEpisodesFile   = dummyFiles.getString("titleEpisodes")
+  val titlePrincipalsFile = dummyFiles.getString("titlePrincipals")
+  val titleRatingsFile    = dummyFiles.getString("titleRatings")
 
-  logger.info("starting dummy runner ...")
+  logger.info("importing data to tables ...")
 
-  logger.info("initializing tables ...")
-  val initResult: Future[List[Unit]] = DBInitializer.initTables()
+  import TSVParser._
 
-  initResult.andThen {
-    case Success(_) =>
-      logger.info("tables initialized successfully")
-    case Failure(e) =>
-      logger.error("error while initializing tables", e)
-      system.terminate()
-  }
+  val importList = List(
+    DummyImporter.importFile(nameBasicsFile, NameBasicRepoImpl.batchInsert),
+    DummyImporter.importFile(titleBasicsFile, TitleBasicRepoImpl.batchInsert),
+    DummyImporter.importFile(titleAkasFile, TitleAkaRepoImpl.batchInsert),
+    DummyImporter.importFile(titleCrewsFile, TitleCrewRepoImpl.batchInsert),
+    DummyImporter.importFile(titleEpisodesFile, TitleEpisodeRepoImpl.batchInsert),
+    DummyImporter.importFile(titlePrincipalsFile, TitlePrincipalRepoImpl.batchInsert),
+    DummyImporter.importFile(titleRatingsFile, TitleRatingRepoImpl.batchInsert)
+  )
 
-  initResult
-    .flatMap { _ =>
-      logger.info("importing data to tables ...")
-      Future.successful()
+  Future
+    .sequence(importList)
+    .onComplete {
+      case Success(_) =>
+        logger.info("import dummy data succeeded")
+        system.terminate()
+
+      case Failure(e) =>
+        logger.error("error while import dummy data", e)
+        system.terminate()
     }
-    .andThen { case _ => system.terminate() }
 
 }
