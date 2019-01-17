@@ -21,9 +21,9 @@ trait TitleEpisodeComponent {
   final class TitleEpisodeTable(tag: Tag) extends Table[TitleEpisode](tag, "title_episodes") {
 
     def tconst        = column[String]("tconst")
-    def parentTconst  = column[String]("parentTconst")
-    def seasonNumber  = column[Option[Int]]("seasonNumber", O.Default(null))
-    def episodeNumber = column[Option[Int]]("episodeNumber", O.Default(null))
+    def parentTconst  = column[String]("parenttconst")
+    def seasonNumber  = column[Option[Int]]("seasonnumber", O.Default(null))
+    def episodeNumber = column[Option[Int]]("episodenumber", O.Default(null))
 
     def * : ProvenShape[TitleEpisode] =
       (

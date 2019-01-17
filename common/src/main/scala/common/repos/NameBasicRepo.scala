@@ -25,11 +25,11 @@ trait NameBasicComponent {
   final class NameBasicTable(tag: Tag) extends Table[NameBasic](tag, "name_basics") {
 
     def nconst            = column[String]("nconst", O.PrimaryKey)
-    def primaryName       = column[String]("primaryName")
-    def birthYear         = column[String]("birthYear")
-    def deathYear         = column[Option[String]]("deathYear", O.Default(null))
-    def primaryProfession = column[List[String]]("primaryProfession", O.Default(Nil))
-    def knownForTitles    = column[List[String]]("knownForTitles", O.Default(Nil))
+    def primaryName       = column[String]("primaryname")
+    def birthYear         = column[String]("birthyear")
+    def deathYear         = column[Option[String]]("deathyear", O.Default(null))
+    def primaryProfession = column[List[String]]("primaryprofession", O.Default(Nil))
+    def knownForTitles    = column[List[String]]("knownforTitles", O.Default(Nil))
 
     def * : ProvenShape[NameBasic] =
       (

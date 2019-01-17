@@ -1,6 +1,7 @@
 package dummy
 import com.typesafe.scalalogging.LazyLogging
 import common.config.ConfigHolder._
+import common.models._
 import common.repos._
 
 import scala.concurrent.Future
@@ -23,13 +24,13 @@ object DummyRunner extends App with LazyLogging {
   import TSVParser._
 
   val importList = List(
-    DummyImporter.importFile(nameBasicsFile, NameBasicRepoImpl.batchInsert),
-    DummyImporter.importFile(titleBasicsFile, TitleBasicRepoImpl.batchInsert),
-    DummyImporter.importFile(titleAkasFile, TitleAkaRepoImpl.batchInsert),
-    DummyImporter.importFile(titleCrewsFile, TitleCrewRepoImpl.batchInsert),
-    DummyImporter.importFile(titleEpisodesFile, TitleEpisodeRepoImpl.batchInsert),
-    DummyImporter.importFile(titlePrincipalsFile, TitlePrincipalRepoImpl.batchInsert),
-    DummyImporter.importFile(titleRatingsFile, TitleRatingRepoImpl.batchInsert)
+    DummyImporter.importFile[NameBasic](nameBasicsFile, NameBasicRepoImpl.batchInsert),
+    DummyImporter.importFile[TitleBasic](titleBasicsFile, TitleBasicRepoImpl.batchInsert),
+    DummyImporter.importFile[TitleAka](titleAkasFile, TitleAkaRepoImpl.batchInsert),
+    DummyImporter.importFile[TitleCrew](titleCrewsFile, TitleCrewRepoImpl.batchInsert),
+    DummyImporter.importFile[TitleEpisode](titleEpisodesFile, TitleEpisodeRepoImpl.batchInsert),
+    DummyImporter.importFile[TitlePrincipal](titlePrincipalsFile, TitlePrincipalRepoImpl.batchInsert),
+    DummyImporter.importFile[TitleRating](titleRatingsFile, TitleRatingRepoImpl.batchInsert)
   )
 
   Future

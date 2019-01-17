@@ -22,8 +22,8 @@ trait TitleRatingComponent {
   final class TitleRatingTable(tag: Tag) extends Table[TitleRating](tag, "title_ratings") {
 
     def tconst        = column[String]("tconst")
-    def averageRating = column[Double]("averageRating")
-    def numVotes      = column[Int]("numVotes")
+    def averageRating = column[Double]("averagerating")
+    def numVotes      = column[Int]("numvotes")
 
     def * : ProvenShape[TitleRating] =
       (
