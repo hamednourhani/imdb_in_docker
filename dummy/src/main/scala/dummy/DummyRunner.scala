@@ -1,49 +1,35 @@
 package dummy
-import java.nio.file.Paths
-
-import akka.stream.scaladsl.{FileIO, Flow, Framing, Sink}
-import akka.util.ByteString
 import com.typesafe.scalalogging.LazyLogging
-import common.models.TitleCrew
-import common.repos.TitleCrewRepoImpl
-import scala.concurrent.duration._
 import common.config.ConfigHolder._
 
+import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 object DummyRunner extends App with LazyLogging {
 
-  import TSVParser._
+  import common.database.ExtendedPostgresProfile.api._
+  import common.database.DatabaseConnectorImpl.db
 
-  val fileName = "title.crews.tsv"
+  db.run(sql"".as[String]).foreach(println)
 
-  val parserFlow = Flow[String].map(_.parseTo[TitleCrew])
+  logger.info("starting dummy runner ...")
 
-  val titleCrewImportStream =FileIO
-    .fromPath(Paths.get(getClass.getClassLoader.getResource(fileName).toURI))
-    .via(Framing.delimiter(ByteString("\n"), maximumFrameLength = 10000000, allowTruncation = true))
-    .drop(1)
-    .map(_.utf8String)
-    .via(parserFlow)
-    .groupedWithin(100,10.second)
-    .mapAsync(3)(TitleCrewRepoImpl.batchInsert)
-    .reduce(_ + _)
-    .runWith(Sink.foreach(count => logger.info(s"$count * 100 of TitleCrew inserted in db")))
+  logger.info("initializing tables ...")
+  val initResult: Future[List[Unit]] = DBInitializer.initTables()
 
-  titleCrewImportStream
-      .andThen{
-        case _ => system.terminate
-      }.onComplete{
-      case Success(value) =>
-        logger.info(value.toString)
-      case Failure(e) =>
-      logger.error("error while importing title crew to table",e)
+  initResult.andThen {
+    case Success(_) =>
+      logger.info("tables initialized successfully")
+    case Failure(e) =>
+      logger.error("error while initializing tables", e)
+      system.terminate()
   }
 
-
-
-
-
-
+  initResult
+    .flatMap { _ =>
+      logger.info("importing data to tables ...")
+      Future.successful()
+    }
+    .andThen { case _ => system.terminate() }
 
 }

@@ -2,14 +2,14 @@ package common.repos
 
 import common.models.TitleEpisode
 import slick.lifted.ProvenShape
-import common.db.PostgresProfiler.api._
+import common.database.ExtendedPostgresProfile.api._
 trait TitleEpisodeRepo {}
 
 object TitleEpisodeRepoImpl extends TitleEpisodeRepo with TitleEpisodeComponent {}
 
 trait TitleEpisodeComponent {
 
-  private[TitleEpisodeComponent] final class TitleEpisodeTable(tag: Tag)
+  final class TitleEpisodeTable(tag: Tag)
       extends Table[TitleEpisode](tag, "title_episodes") {
 
     def tconst        = column[String]("tconst")

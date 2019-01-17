@@ -14,7 +14,9 @@
     <logger name="slick.memory" level="error" />
     <logger name="slick.relational" level="error" />
     <logger name="slick.compiler" level="error" />
-    <logger name="itstar" level="info"/>
+    <logger name="common" level="info"/>
+    <logger name="dummy" level="info"/>
+    <logger name="rest" level="info"/>
     <root level="error">
         <appender-ref ref="CONSOLE"/>
     </root>

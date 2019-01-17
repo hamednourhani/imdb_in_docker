@@ -1,15 +1,17 @@
-package common.db
+package common.database
 
 import com.github.tminglei.slickpg._
-import com.github.tminglei.slickpg.json.PgJsonExtensions
 import com.typesafe.scalalogging.LazyLogging
+import ExtendedPostgresProfile.api.Database
 
-object DatabaseConnectorImpl extends PostgresProfiler {
+object DatabaseConnectorImpl extends LazyLogging {
 
-  import api._
+  val db: ExtendedPostgresProfile.backend.Database = connect()
 
-  val db: backend.DatabaseDef = Database.forConfig("db")
-  db.createSession()
+  private def connect(): ExtendedPostgresProfile.backend.Database = {
+    logger.info("connecting to db")
+    Database.forConfig("db")
+  }
 
   def closeDB(): Unit = {
     logger.info("closing db connections")
@@ -25,8 +27,7 @@ trait PostgresProfiler
     with PgDateSupport
     with PgDate2Support
     with PgSearchSupport
-    with PgSprayJsonSupport
-    with PgEnumSupport {
+    with PgSprayJsonSupport {
 
   override val pgjson = "jsonb"
 
@@ -43,4 +44,4 @@ trait PostgresProfiler
 
 }
 
-object PostgresProfiler extends PostgresProfiler with PgJsonExtensions
+object ExtendedPostgresProfile extends PostgresProfiler

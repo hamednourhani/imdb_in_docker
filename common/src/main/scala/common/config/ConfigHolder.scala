@@ -15,5 +15,4 @@ object ConfigHolder {
   implicit val materializer: Materializer = ActorMaterializer()
   implicit val ec: ExecutionContext       = system.dispatcher
 
-
 }

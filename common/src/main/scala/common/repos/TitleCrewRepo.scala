@@ -1,12 +1,11 @@
 package common.repos
 
 import common.config.ConfigHolder._
-import common.db.DatabaseConnectorImpl.db
-import common.db.PostgresProfiler.api._
-import common.db.SlickSupport
+import common.database.DatabaseConnectorImpl.db
+import common.database.ExtendedPostgresProfile.api._
 import common.models.TitleCrew
-import common.utils.JsonSupport
 import slick.lifted.ProvenShape
+
 import scala.concurrent.Future
 
 trait TitleCrewRepo {

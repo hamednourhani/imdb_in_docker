@@ -1,4 +1,4 @@
-package common.db
+package common.database
 import com.typesafe.config.{Config, ConfigFactory}
 
 object DatabaseConfig {

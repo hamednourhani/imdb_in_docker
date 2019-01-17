@@ -4,7 +4,7 @@ import akka.http.scaladsl.Http
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 import common.config.ConfigHolder._
-import common.db.DatabaseConnectorImpl
+import common.database.DatabaseConnectorImpl
 
 object Runner extends App with LazyLogging {
 

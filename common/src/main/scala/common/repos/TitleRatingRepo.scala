@@ -2,7 +2,7 @@ package common.repos
 
 import common.models.TitleRating
 import slick.lifted.ProvenShape
-import common.db.PostgresProfiler.api._
+import common.database.ExtendedPostgresProfile.api._
 
 trait TitleRatingRepo {}
 
@@ -11,7 +11,7 @@ object TitleRatingRepoImpl extends TitleRatingRepo with TitleRatingComponent {}
 trait TitleRatingComponent {
 
 
-  private[TitleRatingComponent] final class TitleRatingTable(tag: Tag)
+  final class TitleRatingTable(tag: Tag)
       extends Table[TitleRating](tag, "title_ratings") {
 
     def tconst        = column[String]("tconst")

@@ -42,6 +42,7 @@ lazy val dependencies =
     val akkaStream       = "com.typesafe.akka"          %% "akka-stream"               % akkaV
     val logging          = "com.typesafe.scala-logging" %% "scala-logging"             % scalaLoggingV
     val slick            = "com.typesafe.slick"         %% "slick"                     % slickVersion
+    val hikaricp         = "com.typesafe.slick"         %% "slick-hikaricp"            % slickVersion
     val postgres         = "org.postgresql"             % "postgresql"                 % postgresV
     val spray            = "com.typesafe.akka"          %% "akka-http-spray-json"      % akkaHttpV
     val catsCore         = "org.typelevel"              %% "cats-core"                 % catsV
@@ -67,6 +68,7 @@ lazy val common =
         dependencies.akkaStream,
         dependencies.spray,
         dependencies.slick,
+        dependencies.hikaricp,
         dependencies.postgres,
         dependencies.slickPg,
         dependencies.slickPgSprayJson,

@@ -1,7 +1,7 @@
 package common.repos
 import common.models.TitleAka
 import slick.lifted.ProvenShape
-import common.db.PostgresProfiler.api._
+import common.database.ExtendedPostgresProfile.api._
 
 
 trait TitleAkaRepo {}
@@ -10,7 +10,7 @@ object TitleAkaRepoImpl extends TitleAkaRepo with TitleAkaComponent {}
 
 trait TitleAkaComponent {
 
-  private[TitleAkaComponent] final class TitleAkaTable(tag: Tag) extends Table[TitleAka](tag, "title_basics") {
+  final class TitleAkaTable(tag: Tag) extends Table[TitleAka](tag, "title_basics") {
 
     def titleId         = column[String]("titleId")
     def ordering        = column[Int]("ordering")

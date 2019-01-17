@@ -2,7 +2,7 @@ package common.repos
 
 import common.models.TitleBasic
 import slick.lifted.ProvenShape
-import slick.jdbc.PostgresProfile.api._
+import common.database.ExtendedPostgresProfile.api._
 
 
 trait TitleBasicRepo {}
@@ -11,7 +11,7 @@ object TitleBasicRepoImpl extends TitleBasicRepo with TitleBasicComponent {}
 
 trait TitleBasicComponent {
 
-  private[TitleBasicComponent] final class TitleBasicTable(tag: Tag) extends Table[TitleBasic](tag, "title_basics") {
+  final class TitleBasicTable(tag: Tag) extends Table[TitleBasic](tag, "title_basics") {
 
     def tconst         = column[String]("tconst")
     def titleType      = column[String]("titleType")

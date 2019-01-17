@@ -2,16 +2,19 @@ package common.repos
 
 import common.models.NameBasic
 import slick.lifted.ProvenShape
-import common.db.PostgresProfiler.api._
+import common.database.ExtendedPostgresProfile.api._
 
 trait NameBasicRepo {}
 
-object NameBasicRepoImpl extends NameBasicRepo with NameBasicComponent {}
+object NameBasicRepoImpl extends NameBasicRepo with NameBasicComponent {
+  def log() =
+  println(nameBasicsTable.result.headOption)
+}
 
 trait NameBasicComponent {
 
 
-  private[NameBasicComponent] final class NameBasicTable(tag: Tag) extends Table[NameBasic](tag, "name_basics") {
+  final class NameBasicTable(tag: Tag) extends Table[NameBasic](tag, "name_basics") {
 
     def nconst            = column[String]("nconst", O.PrimaryKey)
     def primaryName       = column[String]("primaryName")
@@ -31,6 +34,8 @@ trait NameBasicComponent {
       ) <> ((NameBasic.apply _).tupled, NameBasic.unapply)
   }
 
-  protected val nameBasicsTable = TableQuery[NameBasicTable]
+  val nameBasicsTable = TableQuery[NameBasicTable]
+
+
 
 }

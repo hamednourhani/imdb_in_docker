@@ -1,6 +1,6 @@
 package common.repos
 
-import common.db.PostgresProfiler.api._
+import common.database.ExtendedPostgresProfile.api._
 
 trait AggregateRepo {
 
