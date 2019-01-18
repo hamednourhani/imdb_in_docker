@@ -3,13 +3,14 @@ IMDB Dummy Rest
 
 #### Run database and populate tables
 
-run database (`imdb`) and populate sample tables by dummy data from `dummy` folder :
+run database (`imdb`) and create sample tables :
 
-```./db.sh```
+```./run.sh```
 
 ##### note :
-before start `db.sh` replace `tsv` files in `db/dummy` with the real one.
+copy tsv files to files in `dummy/src/main/resources` according to dummy subProject application.conf.
 
+then run `sbt dummy/run` to populate tables with data
 
 
 ##### test db :
@@ -22,5 +23,5 @@ before start `db.sh` replace `tsv` files in `db/dummy` with the real one.
 
 #### Run rest server
 
-`cd` root of project `sbt run`
+`cd` root of project `sbt rest/run`
 
